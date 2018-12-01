@@ -1,28 +1,23 @@
 
-def add_num(x, result_list):
+def add_num(x):
     with open ("input.txt", "r") as f:
         for num in f:
             x = x + int(num)
-            result_list.append(x)
     return x
 
-def find_dupe(result_list, q):
-    #print("LOOKING")
-    start = result_list[q]
-    for item in result_list:
-        if (item > 0) and (item == start):
-            print("SOLUTION: " + str(item))
-            return True
-    return False
-
 x = 0
-result_list = []
-q = 0
-add_num(x, result_list) #GIVES SOLUTION TO PART 1
-#print(result_list)
-match = find_dupe(result_list, q)
-while (not match):
-    add_num(x, result_list)
-    match = find_dupe(result_list, q)
-    q = q+1
-    print(q)
+y = add_num(x)
+print(y) #GIVES SOLUTION TO PART 1
+
+#Provided by u/mcpower_ on reddit. Thanks.
+import itertools
+data = [int(x) for x in open("input.txt").readlines()]
+print(sum(data))
+
+freq = 0
+seen = set([0])
+for num in itertools.cycle(data):
+    freq += num
+    if freq in seen:
+        print(freq); break #SOLUTION TO PART 2
+    seen.add(freq)
